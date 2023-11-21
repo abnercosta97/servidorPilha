@@ -29,3 +29,52 @@ export default class Pilha {
         res.send(pilhaArray);
     }
 }
+
+/*
+import { Request, Response } from "express";
+import { MyNode, Stack } from "../models/stack";
+
+export default class Pilha {
+    private pilha: Stack<MyNode<string>>;
+
+    constructor() {
+        this.pilha = new Stack<MyNode<string>>();
+    }
+
+    public push(req: Request, res: Response): void {
+        let nome: string = req.params.nome;
+        let novoNode = new MyNode<MyNode<string>>(new MyNode<string>(nome));
+
+        this.pilha.push(novoNode);
+
+        // Chamar o método write do Arquivo para cadastrar no arquivo "dados.txt"
+        // Não está claro como você deseja usar Arquivo.write neste contexto.
+        // Se necessário, ajuste conforme sua lógica.
+
+        res.send(this.getPilhaArray());
+    }
+
+    public pop(req: Request, res: Response): void {
+        let poppedNode = this.pilha.pop();
+
+        // Chamar o método write do Arquivo para cadastrar no arquivo "dados.txt"
+        // Não está claro como você deseja usar Arquivo.write neste contexto.
+        // Se necessário, ajuste conforme sua lógica.
+
+        res.send(this.getPilhaArray());
+    }
+
+    private getPilhaArray(): Array<string> {
+        let pilhaArray: Array<string> = [];
+        let current_node = this.pilha.top;
+
+        while (current_node !== null) {
+            pilhaArray.push(current_node.value.value);
+            current_node = current_node.next;
+        }
+
+        return pilhaArray.reverse(); // Revertendo a ordem para corresponder à lógica da pilha
+    }
+}
+*/
+
