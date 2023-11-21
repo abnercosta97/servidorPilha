@@ -1,14 +1,13 @@
-import { Router, Request, Response } from "express";
-//import { push, pop } from ".";
+import { Router } from "express";
+import Pilha from "../controllers/Pilha";
 
 const routes = Router();
+const pilhaController = new Pilha();
 
+routes.get("/push/:nome", pilhaController.push);
+routes.get("/pop", pilhaController.pop);
 
-routes.get("/push/:nome", );//push);
-routes.get("/pop", )///pop);
-
-//aceita qualquer método HTTP ou URL
-routes.use( (_:Request,res:Response) => res.json({error:"Requisição desconhecida"}) );
-
+// Aceita qualquer método HTTP ou URL
+routes.use((_, res) => res.json({ error: "Requisição desconhecida" }));
 
 export default routes;
