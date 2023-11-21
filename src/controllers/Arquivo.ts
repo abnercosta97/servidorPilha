@@ -1,27 +1,14 @@
-import fs from 'fs';
+import fs from "fs-extra";
 
-export default class Arquivo{
-    private static filename: string = "./src/controllers/dados.txt";
-    public static read(): Promise<string> | never{
-        return new Promise((resolve, reject) => {
-            fs.readFile(this.filename, (err, data) => {
-                if(err){
-                    reject(err);
-                }else{
-                    resolve(data.toString());
-                }
-            });
-        });
-    }
-    public static write(nome: string): Promise<void> | never{
-        return new Promise((resolve, reject) => {
-            fs.writeFile(this.filename, nome, (err) => {
-                if(err){
-                    reject(err);
-                }else{
-                    resolve();
-                }
-            });
-        });
-    }
+export default class Arquivo {
+  private static filename: string = "./src/controllers/dados.txt";
+
+  public static async read(): Promise<string[]> | never {
+    const buffer = await fs.readFile(Arquivo.filename, "utf-8");
+    return buffer ?  buffer.split("\r\n") : [];
+  }
+
+  public static async write(nome: string): Promise<void> | never {
+    fs.writeFile(Arquivo.filename, nome, "utf-8");
+  }
 }
