@@ -4,8 +4,8 @@ import Fila from "../controllers/Fila";
 const routes = Router();
 const fila = new Fila();
 
-routes.get("/fila/append/:nome/:doado", fila.append);
-routes.get("/remove/pop", fila.remove);
+routes.get("/append/:nome/:doador", fila.append);
+routes.get("/remove", fila.remove);
 
 
 // Aceita qualquer método HTTP ou URL

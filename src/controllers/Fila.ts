@@ -4,26 +4,22 @@ import PacienteProps from "../types";
 
 export default class Fila {
   public async append(req: Request, res: Response): Promise<void> {
-    const { paciente } = req.params;
+    const { nome, doador } = req.params;
     const pacientes = await Arquivo.read();
-    const pacienteObj: PacienteProps = {
-      nome: paciente,
-      doador: false // Provide a value for the 'doador' property
-    };
-    pacientes.push(pacienteObj);
-    await Arquivo.write(pacientes.join("\r\n"));
-    res.send(pacientes);
+    pacientes.push({ nome, doador: doador === 'true' });
+    await Arquivo.write(pacientes);
+    res.json(pacientes);
 }
 
 
   public async remove(_: Request, res: Response): Promise<void> {
-    const nomes = await Arquivo.read();
-    const nome = nomes.shift();
-    if (!nome) {
-      res.send("Pilha vazia");
-      return;
+    const pacientes = await Arquivo.read();
+    if (pacientes.length === 0) {
+        res.send("Fila vazia");
+    } else {
+      const paciente = pacientes.shift();
+        await Arquivo.write(pacientes);
+        res.json(paciente);
     }
-    await Arquivo.write(nomes.join("\r\n"));
-    res.send(nome);
-  }
+}
 }
