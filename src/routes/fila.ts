@@ -1,11 +1,11 @@
 import { Router } from "express";
-import Pilha from "../controllers/Pilha";
+import Fila from "../controllers/Fila";
 
 const routes = Router();
-const pilhaController = new Pilha();
+const fila = new Fila();
 
-routes.get("/push/:nome/:doador", pilhaController.push);
-routes.get("/pop", pilhaController.pop); 
+routes.get("/fila/append/:nome/:doado", fila.append);
+routes.get("/remove/pop", fila.remove);
 
 
 // Aceita qualquer método HTTP ou URL
